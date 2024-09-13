@@ -49,7 +49,7 @@
       🔵Concluded
      </td>
      <td>
-      Very Useful
+      Workflow Test
      </td>
     </tr>
    </tbody>
