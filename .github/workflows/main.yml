@@ -1,0 +1,36 @@
+name: Update Readings
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-readme:
+    if: github.actor != 'github-actions'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run script to update README
+        run: |
+          python update.py
+
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: '*'
+          message: 'Reading lists updated.'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
